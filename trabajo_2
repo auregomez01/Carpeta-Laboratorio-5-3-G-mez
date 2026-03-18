@@ -1,0 +1,14 @@
+int xprev=0;
+int yprev=0;
+void setup(){
+  size(800, 600);
+}
+void draw(){
+background(255, 30, 80);
+if(mousePressed==true){
+line(mouseX, mouseY, xprev, yprev);
+}
+xprev=mouseX;
+yprev=mouseY;
+}
+//mientras tengamos presionado el click, vamos dibujando siguiendo la dirección del mouse
