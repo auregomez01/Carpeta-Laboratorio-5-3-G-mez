@@ -1,0 +1,18 @@
+int xprev=0;
+int yprev=0;
+void setup(){
+  size(800, 600);
+}
+void draw(){
+background(255, 30, 80);
+if(mousePressed==true){
+line(mouseX, mouseY, xprev, yprev);
+line(width-mouseX, mouseY, width-xprev, yprev);
+line(mouseX, height-mouseY, xprev, height-yprev);
+line(width-mouseX, height-mouseY, width-xprev, height-yprev);
+}
+xprev=mouseX;
+yprev=mouseY;
+}
+
+//en este código al clickear nuestro dibujo se "copia" en 4 partes de la pantalla espejandose. 
