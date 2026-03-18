@@ -1,0 +1,15 @@
+int xprev=0;
+int yprev=0;
+void setup(){
+  size(800, 600);
+}
+void draw(){
+background(255, 30, 80);
+if(mousePressed==true){
+line(mouseX, mouseY, xprev, yprev);
+line(width-mouseX, mouseY, width-xprev, yprev);
+}
+xprev=mouseX;
+yprev=mouseY;
+}
+//mientras tenga presionado el click se dibuja una linea, pero también se dibuja en el lado derecho
