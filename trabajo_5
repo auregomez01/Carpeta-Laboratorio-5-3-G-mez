@@ -1,0 +1,21 @@
+
+void setup() {
+  size(800, 600);
+}
+void draw(){
+   strokeWeight(MouseVel());
+  line(mouseX, mouseY, pmouseX, pmouseY);
+}
+float MouseVel(){
+  float ca= pmouseX-mouseX;
+  float co= pmouseY-mouseY;
+  float h=sqrt(ca*ca+co*co);
+  return h;
+}
+int randomI(float Maximo){
+  int Val=round(random(Maximo));
+  
+  return Val;
+}
+
+//calcula la hipotenusa de un triangulo, suma cateto adyacente y c. opuesto, los eleva a la 2, y saca su raíz.
