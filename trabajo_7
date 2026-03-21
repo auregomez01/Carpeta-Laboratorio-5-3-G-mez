@@ -1,0 +1,24 @@
+float radio; 
+float xc, yc;
+void setup() {
+  size(800, 600);
+  radio = random(100, 400);
+  xc=random(width);
+  yc=random(height);
+}
+void draw(){
+  if(tocaC( xc, yc, radio)) 
+    fill(255, 0, 0);
+else fill(255);
+  
+   circle(xc, yc, radio*2);
+}
+boolean tocaC(float x, float y, float r){
+  float d=dist(mouseX, mouseY, x, y);
+  if(d>r)
+    return false;
+     else return true;
+    }
+
+// 20/3 tp, elije un punto random de la pantalla y un diametro random y si el mouse esta dertro del circulo se vuelve rojo y si esta fuera se queda en blanco.
+    
