@@ -1,0 +1,69 @@
+int radio = 0 ;
+void setup() {
+  size(800, 800);
+}
+
+void draw() {
+  if (mousePressed) {
+    radio++;
+    reCuadritos( mouseX, mouseY, radio, radio);
+  }
+}
+
+void mouseReleased() {
+  radio = 0 ;
+}
+
+void reCuadritos(float x, float y, float w, float h) {
+  rectMode(RADIUS);
+  strokeWeight(2);
+  fill(255, 30);
+  rect(x, y, w/2, h/2);
+  noFill();
+  rect(x, y, w/4, h/4);
+  rect(x, y, w/8, h/8);
+  rect(x, y, w/16, h/16);
+  rect(x, y, w/32, h/32);
+  rect(x, y, w/64, h/64);
+}
+//Parte I: Análisis Teórico (Carpeta Física)
+//1. Transcripción y Descripción:
+//Transcribe el código proporcionado y redacta, con tus propias palabras, una descripción general de qué hace el programa cuando se ejecuta. ¿Qué ve el usuario y cómo interactúa con él?
+//2. Glosario de Referencia:
+//Identifica las instrucciones que te resulten ajenas o nuevas. Busca en la Referencia de Processing las siguientes funciones y explica qué hacen y por qué crees que el las incluí en este programa específico.
+//3. Ciclo de Vida de la Variable radio:
+//Explica detalladamente cómo cambia el valor de la variable radio a lo largo del tiempo.
+
+//• ¿Cuál es su valor inicial?¿En qué momento aumenta su valor y debido a qué instrucción?¿Qué evento provoca que vuelva a cero? (Identifica el "hito" o momento clave).
+
+//4. Optimización de Estructura:
+//Hay instrucciones allí que se ejecutan una y otra vez (60 veces por segundo), pero que en realidad no cambian nunca.
+
+//• ¿Qué líneas de código podrían moverse al setup() sin afectar el resultado visual? Justifica tu respuesta.
+
+//Parte II: Versión Digital (Computadora)
+//5. Adaptación Geométrica:
+//Modifica el código original para que, en lugar de cuadrados, la función dibuje círculos concéntricos.
+
+//Respuestas:
+
+//1- En este programa al ejecutarlo, podemos ver que el hacer click nos aparece un cuadrado con otros cuadrados adentro de menor tamaño. A medida que movemos el cursor este cuadrado "deja" un rastro y a medida que pasa esto em tamaño del cuadrado aumenta.
+//2- Instrucciones que me parecieron nuevas:
+// mouseRelased: Funcion especial de processing que se ejecuta automaticamente cuando el usuario suelta el boton del mouse.
+// RectMode(RADIUS): Cambia la forma en que se dibujan los rectangulos. w y h representan la distancia desde el centro.
+//3- Ciclo de vida de la variabke radio.
+// Valor inicial: radio=0; 
+//cuando aumenta (aumenta dentro se draw)
+if(mouse Pressed){
+radio++;
+}
+//si el mouse estapresionado el valor de radio aumenta
+void mouseRelased(){
+radio=0;
+}
+//cuando el usuario suelta el click, el valor de radio vuelve a su valor inicial, en este caso =0
+//4- rectMode(RADIUS);
+strokeWeight(2);
+fill(255,30);
+// estas tres lineas no cambian nunca, por lo que no hace falta ejecutarlas 60 veces por segundo. Son configuraciones fijas de dibujo, no dependen del tiempo ni del mouse.
+//5- (punto en proceso)
