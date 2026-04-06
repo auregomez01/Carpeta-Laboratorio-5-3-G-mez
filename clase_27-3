@@ -1,0 +1,21 @@
+int cantF= 20;
+int cantC= 20;
+
+void setup(){
+size(300,300);
+}
+void draw(){
+float ancho = width / cantC;
+float alto = height / cantF;
+for (float i = 0; i < cantC; i++){
+           for(float j = 0; < cantF; j++){
+                     color c = color(255*(i/cantC), 255*(j/cantC), 164-i*j);
+                     fill(c);
+                     rect(i * ancho, j * alto, ancho, alto);
+                     }
+                     }
+                     }
+
+                     //este trabajo esta en color, cantC es la cantidad de columnas, cantF en la cantidad de filas. ancho=width/cantC (ancho de cada rectangulo). alto=height/cantF (alto de cada rectangulo). como nuestra consola tiene 300*300, cada rectangulo tendra 15*15.
+                     // for (i) recorre columnas (horizontal) 
+                     // for (j) recorre filas (vertical)
