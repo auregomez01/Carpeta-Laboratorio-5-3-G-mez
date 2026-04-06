@@ -1,0 +1,17 @@
+int cantF = 20;
+int cantC = 20;
+
+void setup(){
+size (300,300);
+}
+void draw(){
+float ancho = width / cantC;
+float alto = height / cantF; 
+
+for(float i = 0; i < cantC; i++){
+          for(float j = 0; j < cantF; j++){
+                    rect (i * ancho, j * alto, ancho, alto);
+                    }
+                    }
+                    }
+                    //este es el mismo codigo del ejercicio anterior, solo que sin colores.
