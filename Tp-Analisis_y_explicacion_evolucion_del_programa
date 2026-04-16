@@ -1,0 +1,162 @@
+Programa: 
+
+int cols = 40;
+int filas = 30;
+
+float cW;
+float cH;
+
+float[][][][] grilla; // [col][fila][dato][estado]
+
+void setup() {
+  size(800, 600);
+  
+  cW = width / float(cols);
+  cH = height / float(filas);
+  
+  grilla = new float[cols][filas][5][2];
+  
+  inicializar();
+}
+
+void draw() {
+  background(255);
+  
+  actualizar();
+  dibujar();
+}
+
+// -----------------------------------
+
+void inicializar() {
+  for (int i = 0; i < cols; i++) {
+    for (int j = 0; j < filas; j++) {
+      
+      // COLOR (R, G, B)
+      for (int c = 0; c < 3; c++) {
+        float val = random(255);
+        grilla[i][j][c][0] = val; // target
+        grilla[i][j][c][1] = val; // actual
+      }
+      
+      // POSICIÓN inicial (basada en la grilla)
+      float px = i * cW;
+      float py = j * cH;
+      
+      // X
+      grilla[i][j][3][0] = px;
+      grilla[i][j][3][1] = px;
+      
+      // Y
+      grilla[i][j][4][0] = py;
+      grilla[i][j][4][1] = py;
+    }
+  }
+}
+
+// -----------------------------------
+
+void actualizar() {
+  for (int i = 0; i < cols; i++) {
+    for (int j = 0; j < filas; j++) {
+      
+      for (int d = 0; d < 5; d++) {
+        
+        float actual = grilla[i][j][d][1];
+        float target = grilla[i][j][d][0];
+        
+        if (actual < target) actual += 1;
+        else if (actual > target) actual -= 1;
+        
+        grilla[i][j][d][1] = actual;
+      }
+    }
+  }
+}
+
+// -----------------------------------
+
+void dibujar() {
+  noStroke();
+  
+  for (int i = 0; i < cols; i++) {
+    for (int j = 0; j < filas; j++) {
+      
+      float r = grilla[i][j][0][1];
+      float g = grilla[i][j][1][1];
+      float b = grilla[i][j][2][1];
+      
+      float x = grilla[i][j][3][1];
+      float y = grilla[i][j][4][1];
+      
+      fill(r, g, b);
+      rect(x, y, cW, cH);
+    }
+  }
+}
+
+// -----------------------------------
+
+void mousePressed() {
+  int i = int(mouseX / cW);
+  int j = int(mouseY / cH);
+  
+  if (i >= 0 && i < cols && j >= 0 && j < filas) {
+    
+    // nuevo color destino
+    for (int c = 0; c < 3; c++) {
+      grilla[i][j][c][0] = random(255);
+    }
+    
+    // nueva posición destino aleatoria
+    
+    grilla[i][j][3][0] = random(width);
+    grilla[i][j][4][0] = random(height);
+  }
+}
+// -----------------------------------
+
+void keyPressed() {
+  for (int i = 0; i < cols; i++) {
+    for (int j = 0; j < filas; j++) {
+      
+      // nuevo color destino
+      for (int c = 0; c < 3; c++) {
+        grilla[i][j][c][0] = random(255);
+      }
+      
+      // nueva posición destino
+      grilla[i][j][3][0] = int(random(cols))*cW;
+      grilla[i][j][4][0] = int(random(filas))*cH;
+    }
+  }
+}
+// -----------------------------------
+
+// -----------------------------------
+
+// -----------------------------------
+
+
+Ejercicio: Análisis y explicación de evolución del programa
+
+A partir de los programas trabajados previamente (grilla con color en array 3D, transición de color con array 4D, y versión actual con movimiento), realizar una explicación escrita que dé cuenta de cómo fue evolucionando la estructura de datos y el comportamiento del sistema.
+El objetivo no es describir línea por línea el código, sino .
+¿Qué nuevos datos se agregan además del color?
+¿Cómo se reutiliza la misma lógica para cosas distintas (color y posición)?
+Objetivo: Que puedan identificar que:
+
+• el cambio principal no está en el dibujo, sino en 
+• el array pasa de guardar valores simples a representar 
+• la misma estructura permite resolver distintos problemas (color y movimiento)
+
+Forma de entrega
+
+• Texto breve (entre 10 y 20 líneas) en la carpeta: Se valora claridad por sobre extensión
+• Evitar copiar código completo: centrarse en explicar ideas
+• Sugerencia: Revisar los programas anteriores antes de escribir. La clave está en comparar, no en describir un solo código aislado.
+
+// Respuesta:
+// En todos estos programas podemos ver una evolución en el código y en su comportamiento. 
+// En el ejercicio de Array 3D la grilla almacena valores RGB en cada celda. En cambio en Array 4D se agrega una cuarta dimensión que va a representar el estado de cada dato, permitiendo que cada uno tenga un valor actual y uno que es de destino, haciendo que aparezca la transicion y los colores cambien de una manera lenta.
+// Por ultimo en este ejercicio a parte de los colores tambien se agregan datos nuevos como la posicion X e Y de casa celda, al igual que en el ejercicio anterior, tienen un estado actual y otro de destino permitiendo que cambien de color los cuadritos y que se muevan usando la misma lógica de los ejercicios anteriores.
