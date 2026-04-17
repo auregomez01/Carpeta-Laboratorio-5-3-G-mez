@@ -1,0 +1,20 @@
+void setup(){
+ size(800,600);
+}
+ void draw(){
+   if (mousePressed){
+   estampa (mouseX, mouseY, 100, 100);
+ }
+ }
+   
+   void estampa(float x, float y, float w, float h ){
+   fill(255, 80, 150);
+   rect (x,y,w,h);
+   
+    fill(0, 160, 150);
+    ellipse( x+w/2, y+h/2, w, h);
+    
+    fill(255, 255, 0);
+   rect (x+w/4, y+h/4, w/2, height/2);
+   }
+//Hace una figura donde hagas click
