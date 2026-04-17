@@ -112,43 +112,26 @@ laberinto[col][fila][lado] //cada fila representa estos valores: columna, fila, 
 (codigo en proceso)
 
 int cols = 10;
-
 int filas = 10;
-
 float tam;
 
 boolean[][][] laberinto; // [col][fila][lados]
 
 void setup() {
-
   size(600, 600);
 
-  
-
-  tam = width / float(cols);
-
-  
-
-  laberinto = new boolean[cols][filas][6];
-
-  
-
+tam = width / float(cols);
+laberinto = new boolean[cols][filas][6];
   // Inicializar con valores aleatorios
 
   for (int i = 0; i < cols; i++) {
 
     for (int j = 0; j < filas; j++) {
-
-      
-
       for (int k = 0; k < 6; k++) {
 
         laberinto[i][j][k] = random(1) > 0.5;
 
       }
-
-      
-
     }
 
   }
@@ -156,22 +139,14 @@ void setup() {
 }
 
 void draw() {
-
   background(255);
-
   stroke(0);
-
   
-
   for (int i = 0; i < cols; i++) {
 
     for (int j = 0; j < filas; j++) {
-
-      
-
-      float x = i * tam;
-
-      float y = j * tam;
+    float x = i * tam;
+    float y = j * tam;
 
 
 
