@@ -1,0 +1,91 @@
+//Grilla Interactiva con Memoria de Estado.
+//Les subo esta tarea para que se guarden el ejercicio visto en clase, adaptandolo a la impresion de la estampa vista en ejercicios previos. 
+
+
+//Objetivo:
+//Crear un programa en Processing que dibuje una grilla de celdas. El programa debe "recordar" qué celdas han sido activadas por el usuario mediante un clic, cambiando su apariencia visual (entre un color sólido o un diseño/estampa personalizada) según el valor almacenado en una matriz.
+//Instrucciones:Estructura de Datos:
+
+//• Declara un array bidimensional de tipo booleano (boolean[][]).
+//• El tamaño del array debe corresponder al número de filas y columnas de tu grilla (por ejemplo, 16x9).
+
+//Dibujo (draw):
+
+//• Utiliza dos bucles for anidados para recorrer el array.
+//• Para cada elemento [i][j], calcula la posición (x, y) en la pantalla.
+//• Lógica de visualización:
+//• Si estados[i][j] es false: Dibuja un rectángulo blanco.
+//• Si estados[i][j] es true: Dibuja la estampa o diseño trabajado en ejercicios anteriores (o un color distintivo).
+
+//Interacción (mousePressed):
+
+//• Al hacer clic, el programa debe calcular en qué fila y columna de la grilla se encuentra el puntero del mouse.
+//• Pista: Usa la fórmula columna = mouseX / tamañoCelda y fila = mouseY / tamañoCelda.
+
+//Conceptos Clave para Resolverlo
+
+//• Mapeo de Coordenadas: Traducir una posición en una matriz (índices i, j) a una posición en píxeles (x, y) usando el tamaño de la celda como multiplicador.
+//• Condicionales: El uso de if (estados[i][j]) dentro del bucle de dibujo para decidir qué función ejecutar.
+//• Abstracción: Es recomendable reutilizar la función propia llamada dibujarEstampa(float x, float y, float w, float h) que reciba la posición donde debe dibujarse el diseño complejo y sus dimensiones.
+
+int cantFil = 9;
+int cantCol = 16;
+
+boolean[][] estados;
+
+void setup() {
+  size(800, 600);
+  estados = new boolean[cantCol][cantFil];
+}
+
+void draw() {
+  background(220);
+
+  float ancho = width / float(cantCol);
+  float alto = height / float(cantFil);
+
+  for (int i = 0; i < cantCol; i++) {
+    for (int j = 0; j < cantFil; j++) {
+
+      float x = i * ancho;
+      float y = j * alto;
+
+      if (estados[i][j] == false) {
+        fill(255);
+        rect(x, y, ancho, alto);
+      } else {
+        // si esto esta activado, dibuja la estampa
+        estampa(x, y, ancho, alto);
+      }
+    }
+  }
+}
+
+// si el mouse esta presionado cambia el estado
+void mousePressed() {
+  float ancho = width / float(cantCol);
+  float alto = height / float(cantFil);
+
+  int col = int(mouseX / ancho);
+  int fil = int(mouseY / alto);
+
+  // evita errores si clickea fuera
+  if (col >= 0 && col < cantCol && fil >= 0 && fil < cantFil) {
+    estados[col][fil] = true;
+  }
+}
+
+// estampa
+void estampa(float x, float y, float w, float h) {
+
+  stroke(0);
+
+  fill(255, 80, 150);
+  rect(x, y, w, h);
+
+  fill(0, 160, 150);
+  ellipse(x + w/2, y + h/2, w, h);
+
+  fill(255, 255, 0);
+  rect(x + w/4, y + h/4, w/2, h/2);
+}
