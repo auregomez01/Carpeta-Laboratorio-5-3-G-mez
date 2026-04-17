@@ -1,0 +1,45 @@
+//Desarrollar un programa en Processing que permita registrar y visualizar posiciones en pantalla a partir de la interacción con el mouse.
+
+//Cada vez que el usuario haga click, se debe dibujar un círculo en la posición actual del mouse. Estas posiciones deben almacenarse en un array, de manera que los círculos permanezcan visibles en pantalla.
+
+//El programa debe mostrar como máximo 10 círculos simultáneamente. Una vez alcanzado ese límite, cada nuevo click deberá reemplazar la posición más antigua por la nueva, manteniendo siempre visibles solo los últimos 10 puntos registrados.
+
+//El desafío del ejercicio está en gestionar correctamente el índice del array para reutilizar las posiciones de forma circular, sin depender únicamente de la variable de control de un for.
+
+//Se espera que el programa funcione de manera continua, actualizando la visualización en cada frame.
+
+//Recuerden que pueden apoyarse en la referencia oficial, el cheat sheet y los libros que les compartí. La idea es que usen esos materiales como herramientas de consulta para destrabar dudas y avanzar de forma autónoma en la resolución.
+int maxPuntos = 10;
+
+float[] xs = new float[maxPuntos];
+float[] ys = new float[maxPuntos];
+
+int indice = 0;     // donde guardar elmproximo junto
+int cantidad = 0;   // cuántos puntos válidos hay 
+
+void setup() {
+  size(600, 400);
+}
+
+void draw() {
+  background(255);
+
+  // dibujar los puntos guardados
+  for (int i = 0; i < cantidad; i++) {
+    ellipse(xs[i], ys[i], 20, 20);
+  }
+}
+
+void mousePressed() {
+  
+  xs[indice] = mouseX; //guarda nueva posicion
+  ys[indice] = mouseY;
+
+  
+  indice = (indice + 1) % maxPuntos;
+
+  // aumenta la cantidad hasta el máximo
+  if (cantidad < maxPuntos) {
+    cantidad++;
+  }
+}
