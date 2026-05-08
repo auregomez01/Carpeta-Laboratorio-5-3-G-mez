@@ -1,0 +1,78 @@
+int cols = 20; 
+int fil = 15; 
+float tamCelda; 
+
+boolean [][][] laberinto; 
+
+void setup() { 
+size(800, 600); 
+
+tamCelda = min(width / float(cols), height / float(fil)); 
+laberinto = new boolean[cols][fil][6]; 
+
+inicializarLaberintoAleatorio(); 
+}
+
+void draw() { 
+background(255); 
+stroke(0); 
+strokeWeight(2); 
+
+for (int i = 0; i < cols; i++) { 
+for (int j = 0; j < fil; j++) { 
+  
+float x = i * tamCelda; 
+float y = j * tamCelda; 
+
+// arriba 
+if (laberinto[i][j][0]) { 
+line(x, y, x + tamCelda, y); 
+}
+
+// derecha 
+if (laberinto[i][j][1]) { 
+line(x + tamCelda, y, x + tamCelda, y + 
+tamCelda); 
+} 
+
+// abajo 
+if (laberinto[i][j][2]) { 
+line(x, y + tamCelda, x + tamCelda, y + 
+tamCelda); 
+} 
+
+// izquierda 
+if (laberinto[i][j][3]) { 
+line(x, y, x, y + tamCelda); 
+}
+
+// diagonal \ 
+
+if (laberinto[i][j][4]) { 
+line(x, y, x + tamCelda, y + tamCelda); 
+}
+
+// diagonal/ 
+if (laberinto[i][j][5]) { 
+line(x + tamCelda, y, x, y  + tamCelda); 
+}
+} 
+} 
+} 
+
+void inicializarLaberintoAleatorio() { 
+
+for (int i = 0; i < cols; i++) { 
+for (int j = 0; j < fil; j++) { 
+for (int k = 0; k < 6; k++) { 
+  laberinto[i][j][k] = random(1) > 0.5; 
+} 
+} 
+}
+}
+
+void keyPressed() { 
+if (key == 'r' || key == 'R') { 
+inicializarLaberintoAleatorio(); 
+} 
+}
