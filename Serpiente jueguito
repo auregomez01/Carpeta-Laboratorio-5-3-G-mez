@@ -1,0 +1,120 @@
+void moverSnake() {
+  //dx, dy; //dirccion dl movimiento
+  //Cuerpo
+  //int sTam =1; //tamaño del Snake
+  //int[] sX = new int[cantFil*cantCol];
+  //int[] sY = new int[cantFil*cantCol];
+
+  for (int i = sTam-1; i >0; i--) {
+    sX[i]=sX[i-1] ;
+    sY[i]=sY[i-1] ;
+  }
+
+
+
+  sX[0]=sX[0] +dx;
+  sY[0]=sY[0] +dy;
+}
+
+void chequarComida() {
+
+  if ((sX[0] == mX )&& (sY[0] == mY)) {
+    sTam = sTam+1;
+
+    mX =round(random(cantCol-1));
+    mY= round(random(cantFil-1));
+  }
+}
+
+
+--------------------------------------------------------------------------------------------
+
+void mostrarGrilla() {
+  fill(60);
+  for (int j= 0; j<cantFil; j++) {
+    float y=j*tamFil;
+    for (int i = 0; i<cantCol; i++) {
+      float x = i*tamCol;
+      rect(x, y, tamCol, tamFil);
+    }
+  }
+}
+
+void mostrarSnake() {
+  fill(222, 99, 22);
+  for (int i = 0; i < sTam; i++) {
+    float x = sX[i]*tamCol;
+    float y = sY[i]*tamFil;
+    rect(x, y, tamCol, tamFil);
+  }
+}
+
+void mostrarManzana() {
+  float x = mX*tamCol ;
+  float y = mY *tamFil;
+    fill(255, 0, 0);
+  rect(x, y, tamCol, tamFil);
+}
+
+
+----------------------------------------------------------------------------------------------
+
+
+int cantFil=15, cantCol=15;
+float tamCol, tamFil;
+
+//Movimiento
+int dx=1, dy=0; //dirccion dl movimiento
+
+//Cuerpo
+int sTam =1; //tamaño del Snake
+int[] sX = new int[cantFil*cantCol];
+int[] sY = new int[cantFil*cantCol];
+
+//Manzana
+int mX =round(random(cantCol-1)), mY= round(random(cantFil-1));
+
+void setup() {
+  size(650, 650);
+  tamCol= width/cantCol;
+  tamFil= height/cantFil;
+  //inicializar Snake
+  sX[0]=cantCol/2;
+  sY[0]=cantFil/2;
+}
+
+void draw() {
+  chequarComida();
+  moverSnake();
+
+  mostrarGrilla() ;
+  mostrarManzana();
+  mostrarSnake();
+  frameRate(5);
+  println("X= ", dx, "Y=", dy, "tam", sTam);
+}
+
+void keyPressed() {
+  if (dx==0) {
+    if (key == 'd' || key == 'D') {
+      dx=1;
+      dy=0;
+    }
+
+    if (key == 'a' || key == 'A') {
+      dx=-1;
+      dy=0;
+    }
+  }
+
+  if (dy==0) {
+    if (key == 'w' || key == 'W') {
+      dx=0;
+      dy=-1;
+    }
+    if (key == 's' || key == 'S') {
+      dx=0;
+      dy=1;
+    }
+  }
+}
