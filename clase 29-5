@@ -1,0 +1,45 @@
+Movil m;
+void setup() {
+size(800,600);
+  m = new Movil(width/2, height/2);
+}
+
+void draw() {
+
+  m.mover();
+  m.mostrar();
+}
+
+class Movil {
+  PVector Pos, Vel;
+  int r;
+
+  Movil(float x, float y) {
+    Pos= new PVector (x, y);
+    Vel= new PVector (random(-2, 2), random(-2, 2));
+  }
+
+  void Mover(){
+    Pos.add(Vel);
+    contener();
+  }
+
+  void Mostrar() {
+    ellipse(pos.x, pos.y, R, R);
+  }
+  
+  void Contener(){
+    if(Pos.x <o||Pos.x>width){
+      Pos.sub(Vel);
+      Vel.x = Vel.x*-1;
+    }
+    if(Pos.y<0||Pos.y>height){
+      Pos.sub(Vel);
+      Vel.y = Vel.y*-1;
+    }
+    
+    Movil (float x, float y, float Vx, float Vy){
+      Pos = new PVector (x,y);
+      Vel = new PVector (Vx, Vy);
+    }
+  
