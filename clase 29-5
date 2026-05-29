@@ -42,4 +42,26 @@ class Movil {
       Pos = new PVector (x,y);
       Vel = new PVector (Vx, Vy);
     }
+
+-------------------------------------------------------------------------------------------------------
+
+Movil[] moviles; 
+
+int cant=10;
+
+void setup(){
+  size(800,600);
+  moviles= new Movil[cant];
+  for(i=0; i<cant; i++){
+    moviles [i] = new Movil(random(width), random(height));
+  }
+}
+void draw(){
+  println();
+  for(int=0; i<cant; i++){
+    moviles[i].mover();
+    mfilas[i] mostrar();
+  }
+}
+  
   
