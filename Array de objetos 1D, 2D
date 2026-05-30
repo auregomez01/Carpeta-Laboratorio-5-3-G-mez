@@ -1,0 +1,47 @@
+//Ejercicio 1: Una Fila de Robots (Array 1D)Inicializar objetos en fila 
+//Imagina que tienes n robots  en una pista de carreras recta. Quieres que cada uno
+//coloque automáticamente en una posición de salida diferente a lo largo de la línea separados a distancia fija.
+//Usando la Clase ya creada:
+//Declarar e inicializar un array de 1 dimensión que contenga n objetos Movil, pasándole a cada uno una posición distinta 
+
+int
+
+Movil[] moviles;                                                                                                                                                             
+
+int cant=0;
+int cantBarras=20;
+
+
+void setup(){
+  size(800,400);
+  moviles= new Movil[cant];
+cantBarras= new float[cantBarras];
+anchoBarras=width/float(cantidad);
+ 
+  for(i=0; i<cant; i++){
+    moviles [i] = new Movil(random(width), random(height));
+  }
+for(int=0; i<cantBarras; i++){
+float x= i*anchoBarra; 
+float h= Movil[i];
+}
+void draw(){
+  println();
+  for(int=0; i<cant; i++){
+    moviles[i].mover();
+    mfilas[i] mostrar();
+  }
+
+class Movil {
+  PVector Pos, Vel;
+  int r;
+
+  Movil(float x, float y) {
+    Pos= new PVector (x, y);
+    Vel= new PVector (random(-2, 2), random(-2, 2));
+  }
+ void Mover(){
+Pos.add(Vel);
+contener();
+}
+
