@@ -1,0 +1,96 @@
+//Para arreglar: la pelota traspasa la dos paletas
+
+Pelota P;
+Paleta p1, p2;
+
+void setup(){
+  size(800,600);
+  P= new Pelota();
+  p1 = new Paleta(20, height/2-50);
+  p2 = new Paleta(width-35, height/2-50);
+
+}
+void draw(){
+  background(250);
+  P.mover();
+  P.rebotar();
+  P.mostrar();
+  p1.mostrar();
+  p2.mostrar();
+  
+   if (keyPressed) {
+
+    if (key=='w' || key=='W')
+      p1.moverArriba();
+
+    if (key=='s' || key=='S')
+      p1.moverAbajo();
+
+    if (keyCode==UP)
+      p2.moverArriba();
+
+    if (keyCode==DOWN)
+      p2.moverAbajo();
+  }
+}
+
+//clase pelota
+
+class Pelota{
+  PVector  pos;
+  PVector Vel;
+  float r= 10;
+  float c= color(255);
+  Pelota(){
+    pos= new PVector(width/2, height/2);
+    Vel= new PVector(1,1);
+  }
+  void mover(){
+    pos.add(Vel);
+  }
+  void mostrar(){
+    fill(c);
+    circle(pos.x, pos.y, r);
+  }
+  void rebotar(){
+   if(pos.y>height-r || pos.y<r){
+      Vel.y=Vel.y*-1;
+    }
+  }
+  
+}
+
+//clase paleta
+
+class Paleta {
+  
+  float x, y;
+  float ancho, alto; 
+  float velocidad;
+  
+  Paleta(float x, float y){
+  this.x=x;
+  this.y=y;
+  ancho=15;
+  alto=100;
+  velocidad=7; 
+}
+void mostrar(){
+  fill(99);
+  rect(x, y, ancho, alto);
+}
+
+void moverArriba(){
+    y -= velocidad;
+    if (y < 0) {
+      y = 0;
+    }
+  }
+
+  void moverAbajo() {
+    y += velocidad;
+    if (y > height - alto) {
+      y = height - alto;
+    }
+  }
+}
