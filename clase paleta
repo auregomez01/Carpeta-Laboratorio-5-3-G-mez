@@ -1,0 +1,33 @@
+class Paleta {
+
+  float x, y;
+  float ancho, alto;
+  float velocidad;
+
+  Paleta(float x, float y) {
+    this.x = x;
+    this.y = y;
+    ancho = 15;
+    alto = 100;
+    velocidad = 7;
+  }
+
+  void mostrar() {
+    fill(255);
+    rect(x, y, ancho, alto);
+  }
+
+  void moverArriba() {
+    y -= velocidad;
+    if (y < 0) {
+      y = 0;
+    }
+  }
+
+  void moverAbajo() {
+    y += velocidad;
+    if (y > height - alto) {
+      y = height - alto;
+    }
+  }
+}
