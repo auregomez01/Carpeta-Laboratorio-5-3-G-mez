@@ -1,0 +1,51 @@
+Array list <cuadrado> tubos;
+Pelota bird, float ultima Par=0;
+PVector 6= new PVector (0, 2);
+void getup() {
+  size (800, 600);
+  tubos= new ArrayList <cuadrado> ();
+  bird= new Pelota (100, h/2);
+}
+
+void draw() {
+  background(0);
+  Agregartubos ();
+  bird.add Fuerza (G);
+  bird.mover();
+  borrartubos();
+  for (cuadrado t : tubos)
+  }
+  t.mover();
+t.mostrar();
+}
+bird.mostrar();
+}
+}
+///////////////////////////////////////////////////////////////////////////////
+
+void borrartubos(){
+  for(int i= tubos.size()-1; i>=0; i--){
+    cuadrado Aux=tubos.get(i);
+    if(aux.pos.x<0){
+      tubos.remove(i);}
+  }
+
+///////////////////////////////////////////////////////////////////////////////
+void Agregartubos(){
+  float tActual= millis(),
+  float dt= tActual-UltimoPar;
+  if(dt>5000){
+    tubos.add(new Cuadrado(,));
+    tubos.add(new Cuadrado(,));
+    ultimoPar= tActual;
+  }
+}
+
+//////////////////////////////////////////////////////////////////////////////
+
+void mousePressed(){
+if(mousePressed){
+bird.add Fuerza(salto);
+}
+}
+
