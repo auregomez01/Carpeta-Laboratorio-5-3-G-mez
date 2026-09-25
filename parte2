@@ -127,12 +127,7 @@ void draw() {
     }
   }
 
-  if (!segundaOleada &&
-      frutas.size() == 0 &&
-      medallas.size() == 0 &&
-      frutasAgarradas == 3 &&
-      medallasAgarradas == 1) {
-
+  if (!segundaOleada && frutas.size() == 0 && medallas.size() == 0 && frutasAgarradas == 3 && medallasAgarradas == 1) {
     segundaOleada = true;
 
     for (int i = 0; i < 3; i++) {
@@ -147,8 +142,7 @@ void draw() {
   }
 
   // Ganar
-  if (frutasAgarradas == 6 &&
-      medallasAgarradas == 3) {
+  if (frutasAgarradas == 6 && medallasAgarradas == 3) {
 
     background(0, 150, 0);
 
@@ -222,10 +216,7 @@ void dibujarHUD() {
   textSize(14);
 
   text(
-    "Frutas: " + frutasAgarradas + "/6",
-    10,
-    15
-  );
+    "Frutas: " + frutasAgarradas + "/6", 10, 15);
 
   for (int i = 0; i < 3; i++) {
 
@@ -258,7 +249,6 @@ class Fruta {
     fill(255, 105, 180);
     stroke(255);
     strokeWeight(2);
-
     ellipse( location.x,location.y, 20, 20);
   }
 }
@@ -483,8 +473,7 @@ class Bot {
 
         lateral2.mult(velocidad * 1.5);
 
-        PVector prueba2 = PVector.add(location,lateral2
-          );
+        PVector prueba2 = PVector.add(location,lateral2);
 
         boolean puede2 = true;
 
@@ -522,11 +511,7 @@ class Bot {
         return h;
       }
 
-      if (h.bloqueaCamino(
-        location,
-        objetivo
-        )) {
-
+      if (h.bloqueaCamino( location, objetivo )) {
         return h;
       }
     }
@@ -575,13 +560,7 @@ class Hielo {
 
   boolean esFijo;
 
-  Hielo(
-    float x,
-    float y,
-    float vx,
-    float vy,
-    boolean fijo
-    ) {
+  Hielo(float x, float y, float vx, float vy, boolean fijo) {
 
     location = new PVector(x, y);
 
@@ -596,19 +575,9 @@ class Hielo {
   }
 
   Hielo(
-    float x,
-    float y,
-    float vx,
-    float vy
-    ) {
+    float x, float y, float vx, float vy) {
 
-    this(
-      x,
-      y,
-      vx,
-      vy,
-      false
-      );
+    this( x, y, vx, vy, false);
   }
 
   void update() {
@@ -656,12 +625,7 @@ class Hielo {
         strokeWeight(2);
       }
 
-      rect(
-        location.x,
-        location.y,
-        ancho,
-        alto
-      );
+      rect(location.x,  location.y, ancho, alto );
     }
   }
 
@@ -685,25 +649,14 @@ class Hielo {
 
   boolean chocaCon(PVector p) {
 
-    return PVector.dist(
-      location,
-      p
-      ) < 25;
+    return PVector.dist(location,p) < 25;
   }
 
-  boolean bloqueaCamino(
-    PVector inicio,
-    PVector fin
-    ) {
+  boolean bloqueaCamino(PVector inicio, PVector fin) {
 
-    PVector camino =
-      PVector.sub(
-      fin,
-      inicio
-      );
+    PVector camino = PVector.sub(fin, inicio);
 
-    float distanciaTotal =
-      camino.mag();
+    float distanciaTotal = camino.mag();
 
     if (distanciaTotal == 0) {
       return false;
@@ -711,34 +664,14 @@ class Hielo {
 
     camino.normalize();
 
-    for (
-      float d = 0;
-      d <= distanciaTotal;
-      d += 5
-      ) {
+    for (float d = 0; d <= distanciaTotal; d += 5) {
 
-      PVector punto =
-        PVector.add(
-        inicio,
-        PVector.mult(
-        camino,
-        d
-        )
-        );
+      PVector punto = PVector.add(inicio, PVector.mult(camino, d));
 
-      if (
-        punto.x >
-        location.x - ancho / 2 - 20 &&
-
-        punto.x <
-        location.x + ancho / 2 + 20 &&
-
-        punto.y >
-        location.y - alto / 2 - 20 &&
-
-        punto.y <
-        location.y + alto / 2 + 20
-        ) {
+      if (punto.x > location.x - ancho / 2 - 20 && 
+      punto.x < location.x + ancho / 2 + 20 && 
+      punto.y > location.y - alto / 2 - 20 &&
+      punto.y <location.y + alto / 2 + 20 ) {
 
         return true;
       }
@@ -754,20 +687,11 @@ class Fuego {
 
   PVector velocity;
 
-  Fuego(
-    float x,
-    float y,
-    PVector objetivo
-    ) {
+  Fuego(float x, float y, PVector objetivo) {
 
-    location =
-      new PVector(x, y);
+    location = new PVector(x, y);
 
-    velocity =
-      PVector.sub(
-      objetivo,
-      location
-      );
+    velocity = PVector.sub( objetivo, location);
 
     if (velocity.mag() > 0) {
 
@@ -786,19 +710,9 @@ class Fuego {
 
     noStroke();
 
-    fill(
-      255,
-      255,
-      0,
-      120
-      );
+    fill(255, 255, 0, 120);
 
-    ellipse(
-      location.x,
-      location.y,
-      28,
-      28
-    );
+    ellipse(location.x, location.y, 28, 28);
 
     fill(255, 120, 0);
 
@@ -806,23 +720,13 @@ class Fuego {
 
     strokeWeight(2);
 
-    ellipse(
-      location.x,
-      location.y,
-      16,
-      16
-    );
+    ellipse(location.x, location.y, 16, 16);
 
     fill(255, 255, 150);
 
     noStroke();
 
-    ellipse(
-      location.x - 2,
-      location.y - 2,
-      6,
-      6
-    );
+    ellipse(location.x - 2, location.y - 2, 6, 6);
   }
 
   boolean fueraDePantalla() {
@@ -837,7 +741,7 @@ class Fuego {
 
 void keyPressed() {
 
-  // CREAR HIELOS CON ESPACIO
+  // Crear hielos con espacio
 
   if (key == ' ') {
 
@@ -867,29 +771,16 @@ void keyPressed() {
         x += i * separacion;
       }
 
-      if (
-        x < 15 ||
-        x > width - 15 ||
-        y < 15 ||
-        y > height - 15
-        ) {
+      if ( x < 15 ||x > width - 15 ||  y < 15 ||  y > height - 15  ) {
 
         continue;
       }
 
-      hielos.add(
-        new Hielo(
-        x,
-        y,
-        0,
-        0,
-        false
-        )
-        );
+      hielos.add(new Hielo(x, y, 0, 0, false));
     }
   }
 
-  // ELIMINAR HIELOS CON M
+  // Eliminar hielos con M
 
   if (key == 'm' || key == 'M') {
 
@@ -919,11 +810,7 @@ void keyPressed() {
         x += i * separacion;
       }
 
-      for (
-        int j = hielos.size() - 1;
-        j >= 0;
-        j--
-        ) {
+      for (int j = hielos.size() - 1; j >= 0; j--) {
 
         Hielo h = hielos.get(j);
 
@@ -932,11 +819,7 @@ void keyPressed() {
         }
 
         if (
-          PVector.dist(
-          new PVector(x, y),
-          h.location
-          ) < 25
-          ) {
+          PVector.dist(new PVector(x, y), h.location) < 25) {
 
           hielos.remove(j);
         }
