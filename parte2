@@ -1,15 +1,15 @@
 Mover mover;
 Bot bot;
 
-ArrayList<Hielo> hielos;
-ArrayList<Fuego> fuegos;
-ArrayList<Fruta> frutas;
-ArrayList<Medalla> medallas;
+ArrayList<Hielo> hielos;// lista de los hielos del jugador y el mapa
+ArrayList<Fuego> fuegos;//fuegos disparados
+ArrayList<Fruta> frutas;//frutas en el mapa
+ArrayList<Medalla> medallas;//medallas en el mapa
 
-int frutasAgarradas = 0;
-int medallasAgarradas = 0;
-boolean segundaOleada = false;
-boolean juegoTerminado = false;
+int frutasAgarradas = 0; //cuantas frutas junto el jugador
+int medallasAgarradas = 0; //cuantas medallas junto el jugador
+boolean segundaOleada = false;//controla la segunda oleada
+boolean juegoTerminado = false;//cuando perdes
 
 void setup() {
   size(1000, 600);
@@ -29,11 +29,11 @@ void setup() {
     frutas.add(new Fruta(p.x, p.y));
   }
 
-  PVector pm = posicionSegura();
+  PVector pm = posicionSegura(); 
   medallas.add(new Medalla(pm.x, pm.y));
 }
 
-PVector posicionSegura() {
+PVector posicionSegura() { //contador para que no sea un bucle infinito
   int intentos = 0;
 
   while (intentos < 200) {
@@ -41,7 +41,7 @@ PVector posicionSegura() {
     float y = random(80, height - 80);
 
     PVector p = new PVector(x, y);
-    boolean choca = false;
+    boolean choca = false; //si se choca con un hielo fijo
 
     for (Hielo h : hielos) {
       if (h.esFijo && PVector.dist(p, h.location) < 50) {
@@ -66,12 +66,12 @@ PVector posicionSegura() {
 void crearMapaHielos() {
   hielos.clear();
 
-  // Pared izquierda
+  // Pared izquierda fija
   for (int i = 0; i < 4; i++) {
     hielos.add(new Hielo(350, 100 + i * 130, 0, 0, true));
   }
 
-  // Pared derecha
+  // Pared derecha fija
   for (int i = 0; i < 4; i++) {
     hielos.add(new Hielo(650, 100 + i * 130, 0, 0, true));
   }
@@ -88,12 +88,12 @@ void draw() {
 
     text("¡TE ATRAPÓ!", width / 2, height / 2);
 
-    return;
+    return;//frena todo
   }
 
   background(0);
 
-  dibujarHUD();
+  dibujarpuntaje();
 
   mover.update();
   mover.display();
@@ -127,7 +127,12 @@ void draw() {
     }
   }
 
-  if (!segundaOleada && frutas.size() == 0 && medallas.size() == 0 && frutasAgarradas == 3 && medallasAgarradas == 1) {
+  if (!segundaOleada &&
+      frutas.size() == 0 &&
+      medallas.size() == 0 &&
+      frutasAgarradas == 3 &&
+      medallasAgarradas == 1) {
+
     segundaOleada = true;
 
     for (int i = 0; i < 3; i++) {
@@ -142,7 +147,8 @@ void draw() {
   }
 
   // Ganar
-  if (frutasAgarradas == 6 && medallasAgarradas == 3) {
+  if (frutasAgarradas == 6 &&
+      medallasAgarradas == 3) {
 
     background(0, 150, 0);
 
@@ -152,7 +158,7 @@ void draw() {
 
     text("¡GANASTE!", width / 2, height / 2);
 
-    noLoop();
+    noLoop();//se congela el juego cuando ganas
   }
 
   // Hielo
@@ -181,7 +187,7 @@ void draw() {
     f.update();
     f.display();
 
-    boolean golpeo = false;
+    boolean golpeo = false; //si el fuego toco un hielo
 
     for (int j = hielos.size() - 1; j >= 0; j--) {
 
@@ -209,19 +215,18 @@ void draw() {
   }
 }
 
-void dibujarHUD() {
+void dibujarpuntaje() {
 
   fill(255);
   textAlign(LEFT, TOP);
   textSize(14);
 
-  text(
-    "Frutas: " + frutasAgarradas + "/6", 10, 15);
+  text("Frutas: " + frutasAgarradas + "/6",10,15);
 
   for (int i = 0; i < 3; i++) {
 
-    float x = width - 35 - i * 40;
-    float y = 25;
+    float x = width - 35 - i * 40;//posicion por cada medalla en el puntaje
+    float y = 25;//posicion y del puntaje
 
     stroke(255, 200, 0);
     strokeWeight(4);
@@ -238,7 +243,7 @@ void dibujarHUD() {
 
 class Fruta {
 
-  PVector location;
+  PVector location;//posicion de la fruta
 
   Fruta(float x, float y) {
     location = new PVector(x, y);
@@ -249,13 +254,14 @@ class Fruta {
     fill(255, 105, 180);
     stroke(255);
     strokeWeight(2);
+
     ellipse( location.x,location.y, 20, 20);
   }
 }
 
 class Medalla {
 
-  PVector location;
+  PVector location;//posicion de la medalla
 
   Medalla(float x, float y) {
     location = new PVector(x, y);
@@ -279,13 +285,13 @@ class Medalla {
 
 class Mover {
 
-  PVector location;
-  PVector velocity;
-  PVector acceleration;
+  PVector location; //posicion del jugador 
+  PVector velocity; //velocidad del jugador
+  PVector acceleration;// aceleracion segun la tecla presionada
 
-  float topspeed;
+  float topspeed;//velocidad maxima
 
-  String direccion_jugador;
+  String direccion_jugador;//donde mira para poner hielo
 
   Mover() {
 
@@ -384,13 +390,13 @@ class Mover {
 
 class Bot {
 
-  PVector location;
+  PVector location; //posicion del bot
 
-  float velocidad;
+  float velocidad;//velocida de persecucion 
 
-  Hielo hieloBloqueando;
+  Hielo hieloBloqueando;//hielo que bloquea el camino 
 
-  boolean disparando;
+  boolean disparando;//si esta disparando
 
   Bot() {
 
@@ -473,7 +479,8 @@ class Bot {
 
         lateral2.mult(velocidad * 1.5);
 
-        PVector prueba2 = PVector.add(location,lateral2);
+        PVector prueba2 = PVector.add(location,lateral2
+          );
 
         boolean puede2 = true;
 
@@ -508,15 +515,16 @@ class Bot {
       }
 
       if (h.derritiendo) {
-        return h;
+        return h; //corta el hielo
       }
 
-      if (h.bloqueaCamino( location, objetivo )) {
+      if (h.bloqueaCamino(location,objetivo)) {
+
         return h;
       }
     }
 
-    return null;
+    return null;//no encontro nada
   }
 
   boolean atrapo(PVector objetivo) {
@@ -549,18 +557,18 @@ class Bot {
 
 class Hielo {
 
-  PVector location;
+  PVector location;//posicion del hielo
 
-  float ancho;
-  float alto;
+  float ancho;//ancho del bolque de hielo
+  float alto;//alto del bolque de hielo
 
-  boolean derritiendo;
+  boolean derritiendo;//si se derrite por el fuego
 
-  int tiempoFuego;
+  int tiempoFuego;//tiempo de fuego
 
-  boolean esFijo;
+  boolean esFijo;//si es del mapa para que no se borre con la M
 
-  Hielo(float x, float y, float vx, float vy, boolean fijo) {
+  Hielo(float x,float y,float vx,float vy,boolean fijo) {
 
     location = new PVector(x, y);
 
@@ -574,8 +582,7 @@ class Hielo {
     esFijo = fijo;
   }
 
-  Hielo(
-    float x, float y, float vx, float vy) {
+  Hielo(float x, float y, float vx,float vy) {
 
     this( x, y, vx, vy, false);
   }
@@ -683,9 +690,9 @@ class Hielo {
 
 class Fuego {
 
-  PVector location;
+  PVector location;//posicion del fuego
 
-  PVector velocity;
+  PVector velocity; //velocidad del fuego
 
   Fuego(float x, float y, PVector objetivo) {
 
@@ -784,9 +791,9 @@ void keyPressed() {
 
   if (key == 'm' || key == 'M') {
 
-    int cantidad = 4;
+    int cantidad = 4; //cuantos hielos se crean
 
-    int separacion = 50;
+    int separacion = 50;//distancia entre los hielos
 
     for (int i = 1; i <= cantidad; i++) {
 
